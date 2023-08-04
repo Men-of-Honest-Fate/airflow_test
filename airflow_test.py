@@ -31,8 +31,8 @@ def airflow_test(chat_id):
         "retry_delay": timedelta(minutes=5)
     }
 )
-def check_vds_balance():
+def testing():
     balance = airflow_test(818677727)
 
 
-airflow_tests = check_vds_balance()
+airflow_tests = testing()
