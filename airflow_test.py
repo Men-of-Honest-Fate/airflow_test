@@ -10,7 +10,7 @@ def airflow_test(chat_id):
     response = r.get('https://www.google.com').text
 
     r.post(
-        f'https://api.telegram.org/bot{6191282882:AAE1CwZn4GbGyO4ttL7fesNrn9I4lDa7w2k}/sendMessage',
+        f'https://api.telegram.org/bot6380116078:AAGp5FkW_cM4IMS8Ft9tewztECBTz-c-_EM/sendMessage',
         json={
             "chat_id": chat_id,
             "text": response,
@@ -31,8 +31,8 @@ def airflow_test(chat_id):
         "retry_delay": timedelta(minutes=5)
     }
 )
-def testing():
+def airflow_testing():
     balance = airflow_test(818677727)
 
 
-airflow_tests = testing()
+airflow_tests = airflow_testing()
