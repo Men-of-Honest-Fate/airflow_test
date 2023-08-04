@@ -3,8 +3,8 @@ from airflow.decorators import dag, task
 from datetime import datetime, timedelta
 
 
-@task(task_id='Test airflow in docker', retries=3)
-def test(chat_id):
+@task(task_id='test_airflow', retries=3)
+def airflow_test(chat_id):
     response = r.get('https://www.google.com').text
 
     r.post(
@@ -14,6 +14,8 @@ def test(chat_id):
             "text": response,
         }
     )
+
+    return response
 
 
 @dag(
@@ -28,7 +30,7 @@ def test(chat_id):
     }
 )
 def check_vds_balance():
-    balance = test(818677727)
+    balance = airflow_test(818677727)
 
 
-check_vds_balance()
+b = check_vds_balance()
