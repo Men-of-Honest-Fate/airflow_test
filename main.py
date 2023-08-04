@@ -29,3 +29,6 @@ def test(chat_id):
 )
 def check_vds_balance():
     balance = test(818677727)
+
+
+check_vds_balance()
