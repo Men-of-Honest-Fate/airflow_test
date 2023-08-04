@@ -1,6 +1,8 @@
 import requests as r
 from airflow.decorators import dag, task
+from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
+from airflow import DAG
 
 
 @task(task_id='test_airflow', retries=3)
@@ -24,7 +26,7 @@ def airflow_test(chat_id):
     catchup=False,
     tags=["infra"],
     default_args={
-        "owner": "infra",
+        "owner": "admin",
         "retries": 3,
         "retry_delay": timedelta(minutes=5)
     }
@@ -33,4 +35,4 @@ def check_vds_balance():
     balance = airflow_test(818677727)
 
 
-b = check_vds_balance()
+airflow_tests = check_vds_balance()
