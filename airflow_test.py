@@ -35,7 +35,7 @@ def airflow_test():
     }
 )
 def airflow_testing():
-    response = airflow_test(818677727)
+    response = airflow_test()
     send_message(818677727, str(response))
 
 
