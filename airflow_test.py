@@ -1,8 +1,6 @@
 import requests as r
 from airflow.decorators import dag, task
-from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
-from airflow import DAG
 
 
 @task(task_id="send_test_telegram_message", retries=3)
