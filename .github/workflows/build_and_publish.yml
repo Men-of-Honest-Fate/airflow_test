@@ -87,7 +87,6 @@ jobs:
 #            --workdir="/" \
 #            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test \
 #            alembic upgrade head
-
       - name: Run new version
         id: run_test
         run: |
@@ -101,6 +100,10 @@ jobs:
             --env AUTH_URL='https://api.test.profcomff.com/auth' \
             --name ${{ env.CONTAINER_NAME }} \
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test
+          airflow create_user \
+          --email admin --firstname admin \
+          --lastname admin --password admin \
+          --role admin --username admin
 
   deploy-production:
     name: Deploy Production
