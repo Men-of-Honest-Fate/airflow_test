@@ -4,7 +4,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Linux block
 COPY requirements.txt .
-RUN apt-get update && apt-get -yq install postgresql postgresql-contrib apache-airflow && python3 -m pip install --no-cache-dir -r ./requirements.txt
+RUN apt-get update && apt-get -yq install postgresql postgresql-contrib sudo \
+    && useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo \
+    && sudo python3 -m pip install --no-cache-dir -r ./requirements.txt
 
 # Git block
 COPY airflow_test.py /root/airflow/dags/

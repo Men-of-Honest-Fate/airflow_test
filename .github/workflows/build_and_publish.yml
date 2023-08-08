@@ -90,6 +90,7 @@ jobs:
       - name: Run new version
         id: run_test
         run: |
+          export AIRFLOW_HOME=/root/airflow
           docker stop ${{ env.CONTAINER_NAME }} || true && docker rm ${{ env.CONTAINER_NAME }} || true
           docker run \
             --detach \
