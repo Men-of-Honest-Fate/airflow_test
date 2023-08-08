@@ -14,6 +14,10 @@ RUN mkdir -p /root/airflow/dags/dwh-pipelines && mkdir -p /root/airflow/dags/air
 RUN git clone --recurse-submodules -b main https://github.com/profcomff/dwh-pipelines.git /root/airflow/dags/dwh-pipelines
 RUN git clone --recurse-submodules -b main https://github.com/Men-of-Honest-Fate/airflow_test.git /root/airflow/dags/airflow_test
 
+RUN export PYTHONPATH="${PYTHONPATH}:/usr/local/bin/"
+RUN export PYTHONPATH=/root/airflow/dags/dwh-pipelines:${PYTHONPATH}
+RUN export PYTHONPATH=/root/airflow/dags/airflow_test:${PYTHONPATH}
+
 # Airflow block
 CMD airflow db init && airflow webserver && airflow scheduler
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ "curl", "http://localhost:8080" ]
