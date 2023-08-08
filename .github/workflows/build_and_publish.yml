@@ -100,7 +100,7 @@ jobs:
             --env ROOT_PATH='/dwh_airflow' \
             --env AUTH_URL='https://api.test.profcomff.com/auth' \
             --name ${{ env.CONTAINER_NAME }} \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test \
           airflow create_user \
           --email admin --firstname admin \
           --lastname admin --password admin \
