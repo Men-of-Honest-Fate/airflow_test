@@ -63,7 +63,7 @@ jobs:
       url: https://api.test.profcomff.com/dwh_airflow
     env:
       CONTAINER_NAME: com_profcomff_dwh_airflow_test
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_user:12345@192.168.1.6:5432/airflow_db
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_user:12345@192.168.1.6:5432/airflow_db
     permissions:
       packages: read
 
@@ -91,19 +91,16 @@ jobs:
       - name: Run new version
         id: run_test
         run: |
-          export AIRFLOW_HOME=/root/airflow
           docker stop ${{ env.CONTAINER_NAME }} || true && docker rm ${{ env.CONTAINER_NAME }} || true
-          cd /
-          ./start.sh
-#          docker run \
-#            --detach \
-#            --restart on-failure:3 \
-#            --network=web -p 8080:8080 \
-#            --env DB_DSN='${{ secrets.DB_DSN }}' \
-#            --env ROOT_PATH='/dwh_airflow' \
-#            --env AUTH_URL='https://api.test.profcomff.com/auth' \
-#            --name ${{ env.CONTAINER_NAME }} \
-#            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test \
+          docker run \
+            --detach \
+            --restart on-failure:3 \
+            --network=web -p 8080:8080 \
+            --env DB_DSN='${{ secrets.DB_DSN }}' \
+            --env ROOT_PATH='/dwh_airflow' \
+            --env AUTH_URL='https://api.test.profcomff.com/auth' \
+            --name ${{ env.CONTAINER_NAME }} \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test \
 #          airflow users create \
 #          -e admin -f admin \
 #          -l admin -p admin \
