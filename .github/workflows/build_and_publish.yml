@@ -103,9 +103,9 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test \
           airflow db init \
           airflow users create \
-          --email admin --firstname admin \
-          --lastname admin --password admin \
-          --role admin --username admin
+          -e admin -f admin \
+          -l admin -p admin \
+          -r admin -u admin
 
   deploy-production:
     name: Deploy Production
