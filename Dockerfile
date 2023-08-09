@@ -1,6 +1,7 @@
 FROM python:3.11
 ENV AIRFLOW__CORE__LOAD_EXAMPLES=false
 ENV DEBIAN_FRONTEND=noninteractive
+ENV AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_user:12345@192.168.1.6:5432/airflow_db
 
 # Linux block
 COPY requirements.txt .
