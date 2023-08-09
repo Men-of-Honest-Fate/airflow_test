@@ -78,16 +78,17 @@ jobs:
       - name: Pull new version
         run: docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test
 
-#      - name: Migrate DB
-#        run: |
-#          docker run \
-#            --rm \
-#            --network=web \
-#            --env DB_DSN=${{ secrets.DB_DSN }} \
-#            --name ${{ env.CONTAINER_NAME }}_migration \
-#            --workdir="/" \
-#            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test \
-#            alembic upgrade head
+      - name: Migrate DB
+        run: |
+          docker run \
+            --rm \
+            --network=web \
+            --env DB_DSN=${{ env.AIRFLOW__CORE__SQL_ALCHEMY_CONN }} \
+            --name ${{ env.CONTAINER_NAME }}_migration \
+            --workdir="/" \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test \
+            alembic upgrade head
+          
       - name: Run new version
         id: run_test
         run: |
