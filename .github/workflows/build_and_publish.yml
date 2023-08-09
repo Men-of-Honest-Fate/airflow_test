@@ -63,7 +63,7 @@ jobs:
       url: https://api.test.profcomff.com/dwh_airflow
     env:
       CONTAINER_NAME: com_profcomff_dwh_airflow_test
-      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_user:12345@192.168.1.6:5432/airflow_db
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_user:12345@192.168.1.6:5432/airflow_db
     permissions:
       packages: read
 
@@ -77,17 +77,6 @@ jobs:
           
       - name: Pull new version
         run: docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test
-
-      - name: Migrate DB
-        run: |
-          docker run \
-            --rm \
-            --network=web \
-            --env DB_DSN=${{ env.AIRFLOW__CORE__SQL_ALCHEMY_CONN }} \
-            --name ${{ env.CONTAINER_NAME }}_migration \
-            --workdir="/" \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test \
-            alembic upgrade head
 
       - name: Run new version
         id: run_test
