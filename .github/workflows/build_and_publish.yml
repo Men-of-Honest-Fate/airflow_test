@@ -92,10 +92,6 @@ jobs:
             --name ${{ env.CONTAINER_NAME }} \
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test \
           airflow db init \
-          airflow users create \
-          -e admin -f admin \
-          -l admin -p admin \
-          -r admin -u admin
 
   deploy-production:
     name: Deploy Production
