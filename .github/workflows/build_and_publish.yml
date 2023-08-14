@@ -77,7 +77,6 @@ jobs:
       - name: Run new version
         id: run_test
         run: |
-          git update-index --chmod=+x ./start.sh \
           docker stop ${{ env.CONTAINER_NAME }} || true && docker rm ${{ env.CONTAINER_NAME }} || true
           docker run \
             --detach \
