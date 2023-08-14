@@ -12,7 +12,8 @@ RUN apt-get update \
     && python3 -m pip install --no-cache-dir -r ./requirements.txt
 
 # Run block
-COPY --chmod=+x ./start.sh ./start.sh
+COPY ./start.sh ./start.sh
+RUN chmod a+x ./start.sh
 
 CMD /start.sh
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ "curl", "http://localhost:8080" ]
