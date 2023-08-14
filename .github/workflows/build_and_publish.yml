@@ -85,7 +85,7 @@ jobs:
             --detach \
             --restart on-failure:3 \
             --network=web -p 8080:8080 \
-            --env AIRFLOW__DATABASE__SQL_ALCHEMY_CONN='${{ secrets.DB_DSN }}' \
+            --env AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=${{ secrets.SQL_ALCHEMY_CONN }} \
             --name ${{ env.CONTAINER_NAME }} \
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test \
 
